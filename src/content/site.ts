@@ -34,11 +34,11 @@ export type Metric = {
 
 export const metrics: Metric[] = [
   {
-    value: 10,
+    value: 15,
     prefix: "",
     suffix: "+",
-    label: "Production contracts",
-    sub: "Ethereum · Solana · L2",
+    label: "Projects worked on",
+    sub: "Client & personal builds",
   },
   {
     value: 0,
