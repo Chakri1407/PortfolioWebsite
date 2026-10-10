@@ -1,26 +1,256 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ---- Surfaces ---- */
+  --color-bg: #08080a;
+  --color-surface: #0e0e11;
+  --color-surface-2: #141418;
+  --color-surface-3: #1c1c21;
+
+  /* ---- Text ---- */
+  --color-ink: #ededef;
+  --color-muted: #8a8a94;
+  --color-dim: #5a5a63;
+  --color-faint: #3a3a42;
+
+  /* ---- Accent ---- */
+  --color-accent: #c6f24e;
+  --color-accent-dim: #9bbf3a;
+  --color-accent-glow: rgba(198, 242, 78, 0.15);
+
+  /* ---- Lines ---- */
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-line-strong: rgba(255, 255, 255, 0.14);
+
+  /* ---- Type ---- */
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* ---- Motion ---- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ---- Layout ---- */
+  --spacing-gutter: 1.5rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    font-variant-ligatures: contextual;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #08080a;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #26262c;
+    border-radius: 99px;
+    border: 3px solid var(--color-bg);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #36363e;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /*
+   * Scroll reveals.
+   *
+   * The hidden state is scoped to `.js`, which an inline script sets at the top
+   * of <body>. Without JavaScript — blocked, failed or still loading — none of
+   * these rules apply and every section renders fully visible.
+   */
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 24px));
+    will-change: opacity, transform;
+  }
+
+  .js .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.7s var(--ease-out-expo),
+      transform 0.7s var(--ease-out-expo);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: auto;
+  }
+
+  .js .reveal-group > * {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .js .reveal-group.is-visible > * {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.6s var(--ease-out-expo),
+      transform 0.6s var(--ease-out-expo);
+  }
+
+  .js .reveal-group.is-visible > *:nth-child(1) { transition-delay: 0ms; }
+  .js .reveal-group.is-visible > *:nth-child(2) { transition-delay: 70ms; }
+  .js .reveal-group.is-visible > *:nth-child(3) { transition-delay: 140ms; }
+  .js .reveal-group.is-visible > *:nth-child(4) { transition-delay: 210ms; }
+  .js .reveal-group.is-visible > *:nth-child(5) { transition-delay: 280ms; }
+  .js .reveal-group.is-visible > *:nth-child(6) { transition-delay: 350ms; }
+  .js .reveal-group.is-visible > *:nth-child(7) { transition-delay: 420ms; }
+  .js .reveal-group.is-visible > *:nth-child(8) { transition-delay: 490ms; }
+  .js .reveal-group.is-visible > *:nth-child(n + 9) { transition-delay: 560ms; }
+}
+
+@layer utilities {
+  /* Mono label — the "technical value" treatment used across the site */
+  .label-mono {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-dim);
+  }
+
+  .container-site {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    .container-site {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  /* Hairline grid backdrop */
+  .bg-grid {
+    background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.035) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  /* Film grain */
+  .grain::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .text-gradient {
+    background: linear-gradient(180deg, var(--color-ink) 30%, #7a7a85 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .mask-fade-x {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(0.85);
+    }
+  }
+  .animate-pulse-dot {
+    animation: pulse-dot 2.4s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Reveals must never depend on a transition that no longer runs. */
+  .js .reveal,
+  .js .reveal-group > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
