@@ -5,12 +5,19 @@ import { contactSchema } from "@/lib/contact-schema";
 /**
  * In-memory rate limit. Good enough for a personal site on a single region;
  * swap for Upstash Redis if this ever runs multi-instance.
+ *
+ * Disabled outside production: locally there is no `x-forwarded-for`, so every
+ * request shares one bucket and a few test submissions lock you out for an hour.
  */
 const WINDOW_MS = 60 * 60 * 1000;
-const MAX_PER_WINDOW = 5;
+const MAX_PER_WINDOW = 10;
+const ENABLED = process.env.NODE_ENV === "production";
 const hits = new Map<string, number[]>();
 
-function rateLimited(ip: string) {
+/** Returns seconds until the next slot frees up, or 0 if not limited. */
+function retryAfter(ip: string) {
+  if (!ENABLED) return 0;
+
   const now = Date.now();
   const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
   recent.push(now);
@@ -23,17 +30,24 @@ function rateLimited(ip: string) {
     }
   }
 
-  return recent.length > MAX_PER_WINDOW;
+  if (recent.length <= MAX_PER_WINDOW) return 0;
+  return Math.ceil((WINDOW_MS - (now - recent[0])) / 1000);
 }
 
 export async function POST(request: Request) {
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
 
-  if (rateLimited(ip)) {
+  const wait = retryAfter(ip);
+  if (wait > 0) {
+    const minutes = Math.max(1, Math.ceil(wait / 60));
     return NextResponse.json(
-      { error: "Too many messages. Try again later, or email me directly." },
-      { status: 429 },
+      {
+        error: `Too many messages. Try again in about ${minutes} minute${
+          minutes === 1 ? "" : "s"
+        }, or email me directly.`,
+      },
+      { status: 429, headers: { "Retry-After": String(wait) } },
     );
   }
 
