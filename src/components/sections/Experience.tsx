@@ -10,7 +10,11 @@ export function Experience() {
     >
       <div className="container-site">
         <Reveal>
-          <SectionHeading eyebrow="Experience" title="Where I've worked" />
+          <SectionHeading
+            eyebrow="Experience"
+            title="Where I've worked"
+            description="2.5+ years building production blockchain systems."
+          />
         </Reveal>
 
         <ol className="mt-14 space-y-px">

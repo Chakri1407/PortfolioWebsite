@@ -15,7 +15,7 @@ export const site = {
   tagline:
     "I architect secure, gas-optimized smart contracts and cross-chain infrastructure across EVM, Solana and Hyperledger.",
   summary:
-    "Certified Blockchain Developer with 2+ years specializing in architecting secure smart contracts and dApps across EVM, Solana and Hyperledger ecosystems. Proficient in Solidity and Rust (Anchor) with deep expertise in Hardhat, Web3.js and Ethers.js. Experienced in building gas-optimized DeFi protocols, DAOs, NFT marketplaces, LayerZero protocols and Real-World Asset (RWA) tokenization platforms.",
+    "Certified Blockchain Developer with 2.5+ years specializing in architecting secure smart contracts and dApps across EVM, Solana and Hyperledger ecosystems. Proficient in Solidity and Rust (Anchor) with deep expertise in Hardhat, Web3.js and Ethers.js. Experienced in building gas-optimized DeFi protocols, DAOs, NFT marketplaces, LayerZero protocols and Real-World Asset (RWA) tokenization platforms.",
   roles: [
     "Blockchain Developer",
     "Smart Contract Engineer",

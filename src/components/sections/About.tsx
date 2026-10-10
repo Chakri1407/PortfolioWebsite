@@ -6,7 +6,7 @@ import { site } from "@/content/site";
 
 const facts = [
   { k: "Based in", v: "Hyderabad, India" },
-  { k: "Experience", v: "2+ years" },
+  { k: "Experience", v: "2.5+ years" },
   { k: "Current", v: "Blockchain Developer @ SoluLab" },
   { k: "Focus", v: "Smart contracts · DeFi · RWA · Cross-chain" },
   { k: "Languages", v: "Solidity · Rust (Anchor) · TypeScript" },
