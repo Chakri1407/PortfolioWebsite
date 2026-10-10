@@ -84,7 +84,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={fontVars}>
+    // `suppressHydrationWarning` covers the class our inline script adds to
+    // <html> before hydration (and the one Lenis adds after).
+    <html lang="en" className={fontVars} suppressHydrationWarning>
       <body className="grain antialiased">
         {/*
           Marks the document as reveal-capable before any revealable content

@@ -62,7 +62,7 @@ export function Nav() {
             rel="noopener noreferrer"
             className="hidden items-center gap-1.5 rounded-full border border-line-strong px-4 py-2 text-xs font-medium text-ink transition-colors hover:border-accent hover:text-accent sm:inline-flex"
           >
-            Résumé
+            Resume
             <ArrowUpRight className="size-3.5" aria-hidden />
           </a>
 
@@ -97,7 +97,7 @@ export function Nav() {
               rel="noopener noreferrer"
               className="mt-4 inline-flex items-center gap-1.5 self-start rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-bg"
             >
-              Download résumé
+              Download resume
               <ArrowUpRight className="size-4" aria-hidden />
             </a>
           </nav>

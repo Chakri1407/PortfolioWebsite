@@ -89,7 +89,7 @@ Keep these properties in mind before introducing an animation library.
 
 ## Content notes
 
-Case-study prose in `src/content/projects.ts` was expanded from résumé bullet points.
+Case-study prose in `src/content/projects.ts` was expanded from resume bullet points.
 It describes architecture and design reasoning rather than quoting proprietary code, and
 contains no contract addresses — the SoluLab work is client-owned. Review the wording
 before publishing, and confirm each project name is cleared for public use.

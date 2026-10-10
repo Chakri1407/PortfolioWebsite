@@ -37,7 +37,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="text-sm text-muted transition-colors hover:text-accent"
             >
-              Résumé
+              Resume
             </a>
           </nav>
         </div>

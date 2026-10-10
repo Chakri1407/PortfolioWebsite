@@ -85,7 +85,7 @@ export function Hero() {
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 rounded-full border border-line-strong px-6 py-3.5 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent"
             >
-              Download résumé
+              Download resume
               <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
             </a>
 
