@@ -71,8 +71,13 @@ export async function POST(request: Request) {
 
   const { name, email, company, message, website } = parsed.data;
 
-  // Honeypot tripped — accept silently so bots do not learn anything.
+  // Honeypot tripped — answer exactly as for a real send so bots learn
+  // nothing, but log it: a false positive here silently destroys a real
+  // message, so it must never be invisible to us.
   if (website) {
+    console.warn(
+      `Contact form: honeypot tripped, message discarded. from=${email} name=${name}`,
+    );
     return NextResponse.json({ ok: true });
   }
 

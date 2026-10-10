@@ -92,11 +92,13 @@ export function ContactForm() {
       ) : (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
           {/*
-            Honeypot — hidden from people but present for bots, so not display:none.
-            Uses sr-only rather than a negative offset: a far-left absolute element
-            widens the document and causes horizontal overflow on narrow screens.
+            Honeypot. Uses the `hidden` attribute (display:none) rather than
+            sr-only: Chrome's autofill will happily populate a clipped-but-
+            rendered field, and a filled honeypot silently discards the
+            message. Losing one real enquiry costs far more than letting
+            through the subset of bots that bother to check for display:none.
           */}
-          <div className="sr-only" aria-hidden>
+          <div hidden aria-hidden>
             <label htmlFor="website">Website</label>
             <input
               id="website"
