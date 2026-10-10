@@ -62,6 +62,7 @@ Copy `.env.example` to `.env.local`. Without these the contact form returns a cl
 | `RESEND_API_KEY` | Resend API key — https://resend.com/api-keys |
 | `CONTACT_TO_EMAIL` | Where enquiries are delivered |
 | `CONTACT_FROM_EMAIL` | Verified sender. Use `Portfolio <onboarding@resend.dev>` until a domain is verified. |
+| `CONTACT_RATE_LIMIT` | Optional. Set to `on` to exercise rate limiting outside production. |
 
 ## Deploying to Vercel
 
@@ -72,6 +73,24 @@ Copy `.env.example` to `.env.local`. Without these the contact form returns a cl
 4. Deploy. Subsequent pushes to `main` deploy automatically.
 5. Add a custom domain under **Settings → Domains**, then update `site.url` in
    `src/content/site.ts` so canonical URLs, the sitemap and OG tags point at the real host.
+
+## Contact form behaviour
+
+Every submission ends in a visible notification (`components/ui/Toast.tsx`),
+portalled to `<body>` so it is seen regardless of scroll position:
+
+- **Success** — accent toast, auto-dismisses after 7s, and the form is replaced
+  by a confirmation panel with a "Send another" affordance.
+- **Failure** — red toast that stays until dismissed, carrying the server's own
+  message (rate limited, not configured, delivery failed). Form input is
+  preserved so nothing is retyped.
+
+Rate limiting is 10 submissions per IP per hour and applies in production only;
+locally there is no `x-forwarded-for`, so every request would share one bucket
+and a few tests would lock you out. Set `CONTACT_RATE_LIMIT=on` to try it.
+
+The honeypot field is accepted rather than rejected — the route returns a normal
+success response without sending mail, so a bot cannot tell it was caught.
 
 ## Rendering guarantees
 
