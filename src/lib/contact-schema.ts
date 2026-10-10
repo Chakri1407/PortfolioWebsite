@@ -9,8 +9,10 @@ export const contactSchema = z.object({
     .trim()
     .min(10, "A little more detail helps")
     .max(4000, "That is a bit long — try trimming it down"),
-  // Honeypot: real users never fill this in.
-  website: z.string().max(0).optional().or(z.literal("")),
+  // Honeypot: real users never fill this in. Deliberately permissive — the
+  // route inspects it and accepts silently, so a bot learns nothing from the
+  // response. Rejecting it here would surface a 400 that distinguishes it.
+  website: z.string().max(200).optional(),
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;

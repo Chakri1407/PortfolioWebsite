@@ -11,7 +11,10 @@ import { contactSchema } from "@/lib/contact-schema";
  */
 const WINDOW_MS = 60 * 60 * 1000;
 const MAX_PER_WINDOW = 10;
-const ENABLED = process.env.NODE_ENV === "production";
+// Set CONTACT_RATE_LIMIT=on to exercise this locally.
+const ENABLED =
+  process.env.NODE_ENV === "production" ||
+  process.env.CONTACT_RATE_LIMIT === "on";
 const hits = new Map<string, number[]>();
 
 /** Returns seconds until the next slot frees up, or 0 if not limited. */
