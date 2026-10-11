@@ -9,7 +9,10 @@ export const site = {
   github: "https://github.com/Chakri1407",
   linkedin: "https://www.linkedin.com/in/chakravarthyn1407",
   resume: "/ChakravarthyN_Resume.pdf",
-  url: "https://chakravarthy.dev",
+  // The public production alias. Drives canonical URLs, the sitemap, and the
+  // absolute og:image that LinkedIn/WhatsApp fetch. Must be a domain you own
+  // and that is publicly reachable -- update if you add a custom domain.
+  url: "https://portfolio-website-five-theta-36.vercel.app",
   available: true,
   availableLabel: "Open to opportunities",
   tagline:
