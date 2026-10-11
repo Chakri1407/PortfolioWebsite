@@ -70,7 +70,8 @@ Copy `.env.example` to `.env.local`. Without these the contact form returns a cl
 2. On [vercel.com/new](https://vercel.com/new), import the repo. Vercel detects Next.js —
    no build configuration needed.
 3. Add the three environment variables above under **Settings → Environment Variables**.
-4. Deploy. Subsequent pushes to `main` deploy automatically.
+4. Deploy. Subsequent pushes to the default branch (`master` here) deploy
+   automatically.
 5. Add a custom domain under **Settings → Domains**, then update `site.url` in
    `src/content/site.ts` so canonical URLs, the sitemap and OG tags point at the real host.
 
