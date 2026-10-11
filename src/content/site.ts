@@ -12,7 +12,7 @@ export const site = {
   // The public production alias. Drives canonical URLs, the sitemap, and the
   // absolute og:image that LinkedIn/WhatsApp fetch. Must be a domain you own
   // and that is publicly reachable -- update if you add a custom domain.
-  url: "https://portfolio-website-five-theta-36.vercel.app",
+  url: "https://chakravarthynaik.vercel.app",
   available: true,
   availableLabel: "Open to opportunities",
   tagline:
