@@ -1,12 +1,12 @@
-import { Mail, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
+import { EmailLink } from "@/components/ui/EmailLink";
 import { ContactForm } from "@/components/ContactForm";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/primitives";
 import { site } from "@/content/site";
 
 const channels = [
-  { icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}` },
   { icon: Phone, label: "Phone", value: site.phone, href: `tel:${site.phone.replace(/\s/g, "")}` },
   { icon: LinkedinIcon, label: "LinkedIn", value: "/in/chakravarthyn1407", href: site.linkedin },
   { icon: GithubIcon, label: "GitHub", value: "@Chakri1407", href: site.github },
@@ -24,6 +24,9 @@ export function Contact() {
           />
 
           <ul className="mt-10 divide-y divide-line border-y border-line">
+            <li>
+              <EmailLink email={site.email} variant="row" />
+            </li>
             {channels.map((channel) => (
               <li key={channel.label}>
                 <a

@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { site } from "@/content/site";
+import { metrics, site } from "@/content/site";
 
 export const alt = `${site.name} — ${site.role}`;
 export const size = { width: 1200, height: 630 };
@@ -79,7 +79,7 @@ export default function OpengraphImage() {
             Solidity · Rust (Anchor) · EVM · Solana
           </div>
           <div style={{ color: "#c6f24e", fontSize: "26px" }}>
-            10+ contracts · 0 critical vulns
+            {metrics.slice(0, 2).map((m) => m.short).join(" · ")}
           </div>
         </div>
       </div>

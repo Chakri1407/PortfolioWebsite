@@ -1,5 +1,6 @@
-import { Mail, ShieldCheck } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
+import { EmailLink } from "@/components/ui/EmailLink";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/primitives";
 import { site } from "@/content/site";
@@ -46,12 +47,7 @@ export function About() {
             >
               <LinkedinIcon className="size-3.5" /> LinkedIn
             </a>
-            <a
-              href={`mailto:${site.email}`}
-              className="inline-flex items-center gap-2 rounded-full border border-line-strong px-4 py-2 text-xs text-muted transition-colors hover:border-accent hover:text-accent"
-            >
-              <Mail className="size-3.5" aria-hidden /> Email
-            </a>
+            <EmailLink email={site.email} variant="chip" />
           </div>
         </Reveal>
 

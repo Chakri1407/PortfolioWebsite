@@ -33,6 +33,8 @@ export type Metric = {
   suffix: string;
   label: string;
   sub: string;
+  /** Compact form for the social card, where space is tight. */
+  short: string;
 };
 
 export const metrics: Metric[] = [
@@ -42,6 +44,7 @@ export const metrics: Metric[] = [
     suffix: "+",
     label: "Projects worked on",
     sub: "Client & personal builds",
+    short: "15+ projects",
   },
   {
     value: 0,
@@ -49,6 +52,7 @@ export const metrics: Metric[] = [
     suffix: "",
     label: "Critical vulnerabilities",
     sub: "Across all shipped contracts",
+    short: "0 critical vulns",
   },
   {
     value: 1,
@@ -56,6 +60,7 @@ export const metrics: Metric[] = [
     suffix: "M+",
     label: "Daily bridge volume",
     sub: "Cross-chain infrastructure",
+    short: "$1M+ daily volume",
   },
   {
     value: 50,
@@ -63,6 +68,7 @@ export const metrics: Metric[] = [
     suffix: "%",
     label: "Gas cost reduced",
     sub: "Assembly & storage packing",
+    short: "30–50% gas saved",
   },
   {
     value: 200,
@@ -70,6 +76,7 @@ export const metrics: Metric[] = [
     suffix: "K+",
     label: "NFTs migrated",
     sub: "Flow (Cadence) → Base L2",
+    short: "200K+ NFTs migrated",
   },
 ];
 
